@@ -1,0 +1,41 @@
+﻿using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TSMDotNetApi.Models;
+using TSMDotNetApi.Tests.Properties;
+
+namespace TSMDotNetApi.Tests
+{
+    [TestClass]
+    public class ItemGlobalDataTests
+    {
+        private static ITsmExplorer _tsmExplorer;
+        private static readonly string ApiKey = Resources.ApiKey;
+        public static string RealmName { get; } = "Razuvious";
+
+        [ClassInitialize]
+        public static void ClassInit(TestContext context)
+        {
+            _tsmExplorer = new TsmExplorer(ApiKey);
+        }
+
+        [TestMethod]
+        public async Task GetItemGlobalData_31336()
+        {
+            var data = await _tsmExplorer.GetItemGlobalDataAsync(31336);
+
+            Assert.AreEqual("Blade of Wizardry", data.Name);
+            Assert.AreEqual("Weapon", data.Class);
+            Assert.AreEqual("Sword", data.SubClass);
+            Assert.AreEqual(31336, data.Id);
+            Assert.AreEqual(0, data.VendorBuy);
+            Assert.AreEqual(432949, data.VendorSell);
+            Assert.AreEqual(100, data.Level);
+        }
+
+        [TestMethod]
+        public async Task GetItemGlobalData_Exception()
+        {
+            await Assert.ThrowsExceptionAsync<TsmFailedException>(() => _tsmExplorer.GetItemGlobalDataAsync(-1));
+        }
+    }
+}

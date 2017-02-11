@@ -1,7 +1,11 @@
-﻿namespace TSMDotNetApi.Models
+﻿using Newtonsoft.Json;
+
+namespace TSMDotNetApi.Models
 {
     public class TsmItemGlobalData : TsmItemDataBase
     {
+        [JsonProperty("ItemId")]
+        public new int Id { get; set; }
         public int EuMarketAvg { get; set; }
         public int EuMinBuyoutAvg { get; set; }
         public int EuQuantity { get; set; }
