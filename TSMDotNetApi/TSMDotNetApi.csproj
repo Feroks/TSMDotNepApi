@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.4</TargetFramework>
+    <TargetFramework>netstandard1.2</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <LangVersion>6</LangVersion>
+    <DocumentationFile>bin\Debug\netstandard1.4\TSMDotNetApi.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
