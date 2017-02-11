@@ -2,7 +2,6 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TSMDotNetApi.Enums;
 using TSMDotNetApi.Exceptions;
-using TSMDotNetApi.Models;
 using TSMDotNetApi.Tests.Properties;
 
 namespace TSMDotNetApi.Tests
@@ -29,8 +28,8 @@ namespace TSMDotNetApi.Tests
             Assert.AreEqual("Weapon", data.Class);
             Assert.AreEqual("Sword", data.SubClass);
             Assert.AreEqual(31336, data.Id);
-            Assert.AreEqual(0, data.VendorBuy);
-            Assert.AreEqual(432949, data.VendorSell);
+            Assert.AreEqual(0, data.VendorBuy.Total);
+            Assert.AreEqual(432949, data.VendorSell.Total);
             Assert.AreEqual(100, data.Level);
         }
 

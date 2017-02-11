@@ -1,13 +1,25 @@
-﻿namespace TSMDotNetApi.Models
+﻿using Newtonsoft.Json;
+using TSMModels.NotificationModels.Price;
+
+namespace TSMDotNetApi.Models
 {
     public class TsmItemDataBase
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public int Level { get; set; }
         public string Class { get; set; }
         public string SubClass { get; set; }
-        public int VendorBuy { get; set; }
-        public int VendorSell { get; set; }
+
+        [JsonProperty("VendorBuy")]
+        internal long VendorBuyValue { get; set; }
+        [JsonProperty("VendorSell")]
+        internal long VendorSellValue { get; set; }
+
+        [JsonIgnore]
+        public TsmPrice VendorBuy => new TsmPrice(VendorBuyValue);
+
+        [JsonIgnore]
+        public TsmPrice VendorSell => new TsmPrice(VendorSellValue);
     }
 }
