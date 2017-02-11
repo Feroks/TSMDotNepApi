@@ -12,6 +12,7 @@ static async void testApiAsync()
     // Blade of Wizardry
     var data = await _tsmExplorer.GetItemGlobalDataAsync(31336);
 }
+```
 
 ## Installation
 
