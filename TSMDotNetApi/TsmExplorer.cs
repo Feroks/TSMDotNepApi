@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using TSMDotNetApi.Enums;
+using TSMDotNetApi.Exceptions;
 using TSMDotNetApi.Models;
 
 namespace TSMDotNetApi
@@ -14,9 +15,9 @@ namespace TSMDotNetApi
     /// </summary>
     public class TsmExplorer : ITsmExplorer, IDisposable
     {
-        private readonly string _apiKey;
-        private readonly HttpClient _httpClient;
         private const string BaseUrl = "http://api.tradeskillmaster.com/v1/item/";
+        private readonly HttpClient _httpClient;
+        private readonly string _apiKey;
 
         /// <summary>
         /// Create a new <see cref="TsmExplorer"/> instance.

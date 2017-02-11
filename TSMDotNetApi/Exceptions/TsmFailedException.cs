@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace TSMDotNetApi.Models
+namespace TSMDotNetApi.Exceptions
 {
     /// <summary>
     /// Contains details about failed request

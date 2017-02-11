@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TSMDotNetApi.Enums;
+using TSMDotNetApi.Exceptions;
 using TSMDotNetApi.Models;
 using TSMDotNetApi.Tests.Properties;
 
