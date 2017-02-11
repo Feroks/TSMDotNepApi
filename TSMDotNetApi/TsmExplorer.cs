@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -72,6 +73,11 @@ namespace TSMDotNetApi
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             var response = await _httpClient.SendAsync(request);
             var content = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.InternalServerError)
+            {
+                throw new TsmFailedException("Failed to get data from TSM", response.StatusCode, content, uri);
+            }
 
             var result = JsonConvert.DeserializeObject<T>(content);
 

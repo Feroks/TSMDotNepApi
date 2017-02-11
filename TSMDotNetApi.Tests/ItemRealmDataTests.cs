@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TSMDotNetApi.Enums;
+using TSMDotNetApi.Models;
 using TSMDotNetApi.Tests.Properties;
 
 namespace TSMDotNetApi.Tests
@@ -30,6 +31,12 @@ namespace TSMDotNetApi.Tests
             Assert.AreEqual(0, data.VendorBuy);
             Assert.AreEqual(432949, data.VendorSell);
             Assert.AreEqual(100, data.Level);
+        }
+
+        [TestMethod]
+        public async Task GetItemRealmData_Exception()
+        {
+            await Assert.ThrowsExceptionAsync<TsmFailedException>(() => _tsmExplorer.GetItemRealmDataAsync(TsmRegion.Eu, RealmName, -1));
         }
     }
 }
