@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.2</TargetFramework>
+    <Authors>Mihails Popovs</Authors>
+    <Description>TradeSkillMaster API Class Library</Description>
+    <Product>TradeSkillMaster API</Product>
+    <Company />
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Copyright>Copyright © Mihails Popovs 2017</Copyright>
+    <RepositoryUrl>https://github.com/Feroks/TSMDotNepApi</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Feroks/TSMDotNepApi</PackageProjectUrl>
+    <RepositoryType>GIT</RepositoryType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
