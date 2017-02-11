@@ -11,6 +11,7 @@
     <RepositoryUrl>https://github.com/Feroks/TSMDotNepApi</RepositoryUrl>
     <PackageProjectUrl>https://github.com/Feroks/TSMDotNepApi</PackageProjectUrl>
     <RepositoryType>GIT</RepositoryType>
+    <PackageTags>TSM TradeSkillMaster</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
