@@ -12,7 +12,7 @@
         public int RegionQuantity { get; set; }
         public int RegionHistoricalPrice { get; set; }
         public int RegionSaleAvg { get; set; }
-        public int RegionAvgDailySold { get; set; }
-        public int RegionSaleRate { get; set; }
+        public float RegionAvgDailySold { get; set; }
+        public float RegionSaleRate { get; set; }
     }
 }
