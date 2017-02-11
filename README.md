@@ -16,7 +16,7 @@ static async void testApiAsync()
 
 ## Installation
 
-Install as [NuGet package](https://www.nuget.org/packages/Telegram.Bot/):
+Install as [NuGet package](https://www.nuget.org/packages/TSMDotNetApi/):
 
 ```powershell
 Install-Package TSMDotNetApi
