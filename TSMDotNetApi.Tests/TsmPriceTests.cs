@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TSMModels.NotificationModels.Price;
+using TSMDotNetApi.Models.Price;
 
-namespace TSMConsole.Tests
+namespace TSMDotNetApi.Tests
 {
     [TestClass]
     public class TsmPriceTests

@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using TSMDotNetApi.Extensions;
 
-namespace TSMModels.NotificationModels.Price
+namespace TSMDotNetApi.Models.Price
 {
     public class TsmPrice
     {

@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using TSMModels.NotificationModels.Price;
+using TSMDotNetApi.Models.Price;
 
 namespace TSMDotNetApi.Models
 {

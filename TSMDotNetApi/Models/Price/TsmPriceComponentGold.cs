@@ -1,7 +1,6 @@
 ﻿using TSMDotNetApi.Enums;
-using TSMDotNetApi.Models.Price;
 
-namespace TSMModels.NotificationModels.Price
+namespace TSMDotNetApi.Models.Price
 {
     public class TsmPriceComponentGold : TsmPriceComponentBase
     {
