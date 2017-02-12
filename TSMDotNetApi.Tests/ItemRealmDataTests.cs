@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TSMDotNetApi.Enums;
@@ -37,6 +39,28 @@ namespace TSMDotNetApi.Tests
         public async Task GetItemRealmData_Exception()
         {
             await Assert.ThrowsExceptionAsync<TsmFailedException>(() => _tsmExplorer.GetItemRealmDataAsync(TsmRegion.Eu, RealmName, -1));
+        }
+
+        [TestMethod]
+        public async Task GetItemRealmData_CancelTask_Automatically()
+        {
+            var cs = new CancellationTokenSource();
+            cs.CancelAfter(TimeSpan.FromSeconds(0));
+
+            await Assert.ThrowsExceptionAsync<TaskCanceledException>(() => _tsmExplorer.GetItemRealmDataAsync(TsmRegion.Eu, RealmName, -1, cs.Token));
+        }
+
+        [TestMethod]
+        public async Task GetItemRealmData_CancelTask_Manually()
+        {
+            var cs = new CancellationTokenSource();
+
+            await Assert.ThrowsExceptionAsync<TaskCanceledException>(() =>
+            {
+                var task = _tsmExplorer.GetItemRealmDataAsync(TsmRegion.Eu, RealmName, -1, cs.Token);
+                cs.Cancel();
+                return task;
+            });
         }
     }
 }

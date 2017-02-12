@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using TSMDotNetApi.Enums;
 using TSMDotNetApi.Models;
@@ -23,8 +24,9 @@ namespace TSMDotNetApi
         /// <c>This endpoint may be called a maximum of 500 times per day.</c>
         /// </summary>
         /// <param name="itemId">Id of an item. Wowhead is a good place to fin one.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        Task<TsmItemGlobalData> GetItemGlobalDataAsync(int itemId);
+        Task<TsmItemGlobalData> GetItemGlobalDataAsync(int itemId, CancellationToken cancellationToken = default(CancellationToken));
 
 
         /// <summary>
@@ -40,8 +42,9 @@ namespace TSMDotNetApi
         /// This endpoint may be called a maximum of 5 times per day.
         /// </summary>
         /// <param name="region"><see cref="TsmRegion"/>: EU or US</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        Task<IEnumerable<TsmItemRegionData>> GetRegionalDataAsync(TsmRegion region);
+        Task<IEnumerable<TsmItemRegionData>> GetRegionalDataAsync(TsmRegion region, CancellationToken cancellationToken = default(CancellationToken));
 
 
         /// <summary>
@@ -59,8 +62,9 @@ namespace TSMDotNetApi
         /// </summary>
         /// <param name="region"><see cref="TsmRegion"/>: EU or US</param>
         /// <param name="realm">Realm name</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        Task<IEnumerable<TsmItemRealmData>> GetRealmDataAsync(TsmRegion region, string realm);
+        Task<IEnumerable<TsmItemRealmData>> GetRealmDataAsync(TsmRegion region, string realm, CancellationToken cancellationToken = default(CancellationToken));
 
 
         /// <summary>
@@ -80,7 +84,8 @@ namespace TSMDotNetApi
         /// <param name="region"><see cref="TsmRegion"/>: EU or US</param>
         /// <param name="realm">Realm name</param>
         /// <param name="itemId">Id of an item. Wowhead is a good place to fin one.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        Task<TsmItemRealmData> GetItemRealmDataAsync(TsmRegion region, string realm, int itemId);
+        Task<TsmItemRealmData> GetItemRealmDataAsync(TsmRegion region, string realm, int itemId, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

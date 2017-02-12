@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using TSMDotNetApi.Enums;
@@ -55,11 +56,12 @@ namespace TSMDotNetApi
         /// <c>This endpoint may be called a maximum of 500 times per day.</c>
         /// </summary>
         /// <param name="itemId">Id of an item. Wowhead is a good place to fin one.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        public async Task<TsmItemGlobalData> GetItemGlobalDataAsync(int itemId)
+        public async Task<TsmItemGlobalData> GetItemGlobalDataAsync(int itemId, CancellationToken cancellationToken = default(CancellationToken))
         {
             var uri = $"{itemId}";
-            return await GetDataFromTsm<TsmItemGlobalData>(uri);
+            return await GetDataFromTsm<TsmItemGlobalData>(uri, cancellationToken);
         }
 
         /// <summary>
@@ -78,11 +80,12 @@ namespace TSMDotNetApi
         /// This endpoint may be called a maximum of 5 times per day.
         /// </summary>
         /// <param name="region"><see cref="TsmRegion"/>: EU or US</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        public async Task<IEnumerable<TsmItemRegionData>> GetRegionalDataAsync(TsmRegion region)
+        public async Task<IEnumerable<TsmItemRegionData>> GetRegionalDataAsync(TsmRegion region, CancellationToken cancellationToken = default(CancellationToken))
         {
             var uri = $"region/{region}";
-            return await GetDataFromTsm<IEnumerable<TsmItemRegionData>>(uri);
+            return await GetDataFromTsm<IEnumerable<TsmItemRegionData>>(uri, cancellationToken);
         }
 
         /// <summary>
@@ -103,11 +106,12 @@ namespace TSMDotNetApi
         /// </summary>
         /// <param name="region">Region, US or EU</param>
         /// <param name="realm">Realm name</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        public async Task<IEnumerable<TsmItemRealmData>> GetRealmDataAsync(TsmRegion region, string realm)
+        public async Task<IEnumerable<TsmItemRealmData>> GetRealmDataAsync(TsmRegion region, string realm, CancellationToken cancellationToken = default(CancellationToken))
         {
             var uri = $"{region}/{realm}";
-            return await GetDataFromTsm<IEnumerable<TsmItemRealmData>>(uri);
+            return await GetDataFromTsm<IEnumerable<TsmItemRealmData>>(uri, cancellationToken);
         }
 
         /// <summary>
@@ -130,19 +134,20 @@ namespace TSMDotNetApi
         /// <param name="region"><see cref="TsmRegion"/>: EU or US</param>
         /// <param name="realm">Realm name</param>
         /// <param name="itemId">Id of an item. Wowhead is a good place to fin one.</param>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        public async Task<TsmItemRealmData> GetItemRealmDataAsync(TsmRegion region, string realm, int itemId)
+        public async Task<TsmItemRealmData> GetItemRealmDataAsync(TsmRegion region, string realm, int itemId, CancellationToken cancellationToken = default(CancellationToken))
         {
             var uri = $"{region}/{realm}/{itemId}";
-            return await GetDataFromTsm<TsmItemRealmData>(uri);
+            return await GetDataFromTsm<TsmItemRealmData>(uri, cancellationToken);
         }
 
-        private async Task<T> GetDataFromTsm<T>(string uriPart)
+        private async Task<T> GetDataFromTsm<T>(string uriPart, CancellationToken cancellationToken = default(CancellationToken))
         {
             var uri = CreateUri(uriPart);
 
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
-            var response = await _httpClient.SendAsync(request);
+            var response = await _httpClient.SendAsync(request, cancellationToken);
             var content = await response.Content.ReadAsStringAsync();
 
             if (response.StatusCode == HttpStatusCode.BadRequest || response.StatusCode == HttpStatusCode.InternalServerError)
