@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace TSMDotNetApi.Extensions
 {
@@ -14,6 +15,12 @@ namespace TSMDotNetApi.Extensions
             int output;
             if (source == null) return 0;
             return int.TryParse(source.Replace(",", string.Empty).Trim(), out output) ? output : 0;
+        }
+
+        public static string InsertSymbolAfterNsymbols(this string source, int position, string text)
+        {
+            return string.Join(text, Enumerable.Range(0, (source.Length - 1) / position + 1)
+                .Select(i => source.Substring(i * position, Math.Min(source.Length - i * position, position))));
         }
 
         internal static string NormalizeServerName(this string source)

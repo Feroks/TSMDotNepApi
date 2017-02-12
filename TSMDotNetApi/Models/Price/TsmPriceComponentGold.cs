@@ -1,4 +1,5 @@
 ﻿using TSMDotNetApi.Enums;
+using TSMDotNetApi.Extensions;
 
 namespace TSMDotNetApi.Models.Price
 {
@@ -9,7 +10,7 @@ namespace TSMDotNetApi.Models.Price
         }
 
         public override char PriceTextSymbol => 'g';
-        public override string ValueString => Value.ToString();
+        public override string ValueString => Value.ToString().ReverseString().InsertSymbolAfterNsymbols(3, " ").ReverseString();
 
         public override long ToCopper => TsmPriceComponentCopper.FromSilver(TsmPriceComponentSilver.FromGold(this)).Value;
     }

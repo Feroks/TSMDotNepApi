@@ -26,13 +26,13 @@ namespace TSMDotNetApi.Tests
         [TestMethod]
         public void TsmPriceTest3()
         {
-            Assert.AreEqual(new TsmPrice(50000000).StringifiedValue, "5000g 00s 00c");
+            Assert.AreEqual(new TsmPrice(50000000).StringifiedValue, "5 000g 00s 00c");
         }
 
         [TestMethod]
         public void TsmPriceTest4()
         {
-            Assert.AreEqual(new TsmPrice(121231001).StringifiedValue, "12123g 10s 01c");
+            Assert.AreEqual(new TsmPrice(121231001).StringifiedValue, "12 123g 10s 01c");
         }
 
         [TestMethod]
