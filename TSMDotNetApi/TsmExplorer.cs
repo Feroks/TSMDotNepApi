@@ -22,12 +22,21 @@ namespace TSMDotNetApi
         /// <summary>
         /// Create a new <see cref="TsmExplorer"/> instance.
         /// </summary>
-        /// <param name="apiKey"></param>
-        public TsmExplorer(string apiKey)
+        /// <param name="apiKey">Api key from TSM homepage.</param>
+        /// <param name="httpClient">Custom <see cref="HttpClient"/> instance.</param>
+        public TsmExplorer(string apiKey, HttpClient httpClient = null)
         {
             _apiKey = apiKey;
-            _httpClient = new HttpClient();
-            _httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+
+            if (httpClient == null)
+            {
+                _httpClient = new HttpClient();
+                _httpClient.DefaultRequestHeaders.Add("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; .NET CLR 1.0.3705;)");
+            }
+            else
+            {
+                _httpClient = httpClient;
+            }
         }
 
         /// <summary>
@@ -147,7 +156,7 @@ namespace TSMDotNetApi
         }
 
         /// <summary>
-        /// Dispose of HttpClient inside
+        /// Dispose of <see cref="HttpClient"/> inside
         /// </summary>
         public void Dispose()
         {
