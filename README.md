@@ -9,14 +9,17 @@
 static async void testApiAsync()
 {
     var explorer = new TsmExplorer("your API key");
-    try{
+    try
+    {
         // Blade of Wizardry
         var data = await _tsmExplorer.GetItemGlobalDataAsync(31336);
     }
-    catch (TsmFailedException te){
+    catch (TsmFailedException te)
+    {
         // Request to TSM was invalid
     }
-    catch (Exception e){
+    catch (Exception e)
+    {
         // Generic exception
     }
 }
