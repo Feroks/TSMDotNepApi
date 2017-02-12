@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using TSMDotNetApi.Enums;
 using TSMDotNetApi.Exceptions;
+using TSMDotNetApi.Extensions;
 using TSMDotNetApi.Models;
 
 namespace TSMDotNetApi
@@ -110,7 +111,7 @@ namespace TSMDotNetApi
         /// <returns></returns>
         public async Task<IEnumerable<TsmItemRealmData>> GetRealmDataAsync(TsmRegion region, string realm, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var uri = $"{region}/{realm}";
+            var uri = $"{region}/{realm.NormalizeServerName()}";
             return await GetDataFromTsm<IEnumerable<TsmItemRealmData>>(uri, cancellationToken);
         }
 
@@ -138,7 +139,7 @@ namespace TSMDotNetApi
         /// <returns></returns>
         public async Task<TsmItemRealmData> GetItemRealmDataAsync(TsmRegion region, string realm, int itemId, CancellationToken cancellationToken = default(CancellationToken))
         {
-            var uri = $"{region}/{realm}/{itemId}";
+            var uri = $"{region}/{realm.NormalizeServerName()}/{itemId}";
             return await GetDataFromTsm<TsmItemRealmData>(uri, cancellationToken);
         }
 

@@ -24,7 +24,7 @@ namespace TSMDotNetApi.Tests
         [TestMethod]
         public async Task GetItemRealmData_31336()
         {
-            var data = await _tsmExplorer.GetItemRealmDataAsync(TsmRegion.Eu, RealmName, 31336);
+            var data = await _tsmExplorer.GetItemRealmDataAsync(TsmRegion.Eu, "Twisting Nether", 31336);
 
             Assert.AreEqual("Blade of Wizardry", data.Name);
             Assert.AreEqual("Weapon", data.Class);

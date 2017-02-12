@@ -15,5 +15,10 @@ namespace TSMDotNetApi.Extensions
             if (source == null) return 0;
             return int.TryParse(source.Replace(",", string.Empty).Trim(), out output) ? output : 0;
         }
+
+        internal static string NormalizeServerName(this string source)
+        {
+            return source.Replace("'", string.Empty).Replace(" ", "-").ToLower();
+        }
     }
 }
