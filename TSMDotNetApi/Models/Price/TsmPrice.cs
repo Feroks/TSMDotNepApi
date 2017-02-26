@@ -11,7 +11,7 @@ namespace TSMDotNetApi.Models.Price
 
         public TsmPrice(long? totalPrice)
         {
-            if (totalPrice == null) return;
+            totalPrice = totalPrice ?? 0;
             Total = (long)totalPrice;
         }
 
@@ -56,11 +56,11 @@ namespace TSMDotNetApi.Models.Price
         /// <summary>
         /// Create Object from Gold
         /// </summary>
-        /// <param name="gold"></param>
+        /// <param name="copper">Total copper count, 1g = 10000c</param>
         /// <returns></returns>
-        public static TsmPrice FromGold(int gold)
+        public static TsmPrice FromGold(long copper)
         {
-            return new TsmPrice(gold * 10000);
+            return new TsmPrice(copper * 10000);
         }
     }
 }
