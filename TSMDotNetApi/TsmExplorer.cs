@@ -59,10 +59,10 @@ namespace TSMDotNetApi
         /// <param name="itemId">Id of an item. Wowhead is a good place to fin one.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        public async Task<TsmItemGlobalData> GetItemGlobalDataAsync(int itemId, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<TsmItemGlobalData> GetItemGlobalDataAsync(int itemId, CancellationToken cancellationToken = default(CancellationToken))
         {
             var uri = $"{itemId}";
-            return await GetDataFromTsm<TsmItemGlobalData>(uri, cancellationToken);
+            return GetDataFromTsm<TsmItemGlobalData>(uri, cancellationToken);
         }
 
         /// <summary>
@@ -83,10 +83,10 @@ namespace TSMDotNetApi
         /// <param name="region"><see cref="TsmRegion"/>: EU or US</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        public async Task<IEnumerable<TsmItemRegionData>> GetRegionalDataAsync(TsmRegion region, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<IEnumerable<TsmItemRegionData>> GetRegionalDataAsync(TsmRegion region, CancellationToken cancellationToken = default(CancellationToken))
         {
             var uri = $"region/{region}";
-            return await GetDataFromTsm<IEnumerable<TsmItemRegionData>>(uri, cancellationToken);
+            return GetDataFromTsm<IEnumerable<TsmItemRegionData>>(uri, cancellationToken);
         }
 
         /// <summary>
@@ -109,10 +109,10 @@ namespace TSMDotNetApi
         /// <param name="realm">Realm name</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        public async Task<IEnumerable<TsmItemRealmData>> GetRealmDataAsync(TsmRegion region, string realm, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<IEnumerable<TsmItemRealmData>> GetRealmDataAsync(TsmRegion region, string realm, CancellationToken cancellationToken = default(CancellationToken))
         {
             var uri = $"{region}/{realm.NormalizeServerName()}";
-            return await GetDataFromTsm<IEnumerable<TsmItemRealmData>>(uri, cancellationToken);
+            return GetDataFromTsm<IEnumerable<TsmItemRealmData>>(uri, cancellationToken);
         }
 
         /// <summary>
@@ -137,10 +137,10 @@ namespace TSMDotNetApi
         /// <param name="itemId">Id of an item. Wowhead is a good place to fin one.</param>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns></returns>
-        public async Task<TsmItemRealmData> GetItemRealmDataAsync(TsmRegion region, string realm, int itemId, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<TsmItemRealmData> GetItemRealmDataAsync(TsmRegion region, string realm, int itemId, CancellationToken cancellationToken = default(CancellationToken))
         {
             var uri = $"{region}/{realm.NormalizeServerName()}/{itemId}";
-            return await GetDataFromTsm<TsmItemRealmData>(uri, cancellationToken);
+            return GetDataFromTsm<TsmItemRealmData>(uri, cancellationToken);
         }
 
         private async Task<T> GetDataFromTsm<T>(string uriPart, CancellationToken cancellationToken = default(CancellationToken))
@@ -157,7 +157,6 @@ namespace TSMDotNetApi
             }
 
             var result = JsonConvert.DeserializeObject<T>(content);
-
             return result;
         }
 
