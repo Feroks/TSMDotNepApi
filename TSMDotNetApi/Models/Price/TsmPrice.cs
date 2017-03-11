@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TSMDotNetApi.Extensions;
 
 namespace TSMDotNetApi.Models.Price
@@ -15,40 +17,46 @@ namespace TSMDotNetApi.Models.Price
             Total = (long)totalPrice;
         }
 
-        public TsmPriceComponentGold Gold { get; set; }
-        public TsmPriceComponentSilver Silver { get; set; }
-        public TsmPriceComponentCopper Copper { get; set; }
+        public long Total { get; set; }
 
-        public long Total
+        public TsmPriceComponentGold Gold
         {
             get
             {
-                return (Gold?.ToCopper ?? 0) + (Silver?.ToCopper ?? 0) + (Copper?.ToCopper ?? 0);
-            }
-            private set
-            {
-                var reverseChars = value.ToString().ToCharArray().Reverse().ToArray().ToList();
-                var symbolCount = reverseChars.Count;
+                (List<char> reverseChars, int symbolCount) = PrepareData(Total);
 
-                var copperCharCount = symbolCount < 2 ? symbolCount : 2;
-                Copper = new TsmPriceComponentCopper(string.Join(string.Empty, reverseChars.Take(copperCharCount).Reverse()).StringToInt());
-
-                var silverCharCount = symbolCount < 4 ? 4 - symbolCount : 2;
-                Silver = new TsmPriceComponentSilver(string.Join(string.Empty, reverseChars.Skip(2).Take(silverCharCount).Reverse()).StringToInt());
-
-                if (reverseChars.Count < 5)
-                {
-                    Gold = new TsmPriceComponentGold(0);
-                    return;
-                }
+                if (symbolCount < 5)
+                    return new TsmPriceComponentGold(0);
 
                 reverseChars.RemoveRange(0, 4);
                 reverseChars.Reverse();
 
-                Gold = new TsmPriceComponentGold(string.Join(string.Empty, reverseChars).StringToInt());
+                return new TsmPriceComponentGold(string.Join(string.Empty, reverseChars).StringToInt());
             }
         }
 
+        public TsmPriceComponentSilver Silver
+        {
+            get
+            {
+                (List<char> reverseChars, int symbolCount) = PrepareData(Total);
+
+                var silverCharCount = symbolCount < 4 ? 4 - symbolCount : 2;
+                return new TsmPriceComponentSilver(string.Join(string.Empty, reverseChars.Skip(2).Take(silverCharCount).Reverse()).StringToInt());
+            }
+        }
+
+        public TsmPriceComponentCopper Copper
+        {
+            get
+            {
+                (List<char> reverseChars, int symbolCount) = PrepareData(Total);
+
+                var copperCharCount = symbolCount < 2 ? symbolCount : 2;
+                return new TsmPriceComponentCopper(string.Join(string.Empty, reverseChars.Take(copperCharCount).Reverse()).StringToInt());
+            }
+        }
+        
         public string StringifiedValue => $"{Gold.PriceTextStringified} {Silver.PriceTextStringified} {Copper.PriceTextStringified}".Trim();
 
         public string StirngifiedValueGoldOnly => Gold.PriceTextStringified;
@@ -61,6 +69,14 @@ namespace TSMDotNetApi.Models.Price
         public static TsmPrice FromGold(long copper)
         {
             return new TsmPrice(copper * 10000);
+        }
+
+        private static (List<char> ReverseChars, int SymbolCount) PrepareData(long value)
+        {
+            var reverseChars = value.ToString().ToCharArray().Reverse().ToArray().ToList();
+            var symbolCount = reverseChars.Count;
+
+            return new ValueTuple<List<char>, int>(reverseChars, symbolCount);
         }
     }
 }
