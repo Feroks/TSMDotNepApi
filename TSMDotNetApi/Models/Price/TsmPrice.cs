@@ -23,9 +23,9 @@ namespace TSMDotNetApi.Models.Price
         {
             get
             {
-                (List<char> reverseChars, int symbolCount) = PrepareData(Total);
+                (List<char> reverseChars, int charCount) = PrepareData(Total);
 
-                if (symbolCount < 5)
+                if (charCount < 5)
                     return new TsmPriceComponentGold(0);
 
                 reverseChars.RemoveRange(0, 4);
@@ -39,9 +39,9 @@ namespace TSMDotNetApi.Models.Price
         {
             get
             {
-                (List<char> reverseChars, int symbolCount) = PrepareData(Total);
+                (List<char> reverseChars, int charCount) = PrepareData(Total);
 
-                var silverCharCount = symbolCount < 4 ? 4 - symbolCount : 2;
+                var silverCharCount = charCount < 4 ? 4 - charCount : 2;
                 return new TsmPriceComponentSilver(string.Join(string.Empty, reverseChars.Skip(2).Take(silverCharCount).Reverse()).StringToInt());
             }
         }
@@ -50,9 +50,9 @@ namespace TSMDotNetApi.Models.Price
         {
             get
             {
-                (List<char> reverseChars, int symbolCount) = PrepareData(Total);
+                (List<char> reverseChars, int charCount) = PrepareData(Total);
 
-                var copperCharCount = symbolCount < 2 ? symbolCount : 2;
+                var copperCharCount = charCount < 2 ? charCount : 2;
                 return new TsmPriceComponentCopper(string.Join(string.Empty, reverseChars.Take(copperCharCount).Reverse()).StringToInt());
             }
         }
@@ -71,12 +71,12 @@ namespace TSMDotNetApi.Models.Price
             return new TsmPrice(copper * 10000);
         }
 
-        private static (List<char> ReverseChars, int SymbolCount) PrepareData(long value)
+        private static (List<char> ReverseChars, int CharCount) PrepareData(long value)
         {
             var reverseChars = value.ToString().ToCharArray().Reverse().ToArray().ToList();
-            var symbolCount = reverseChars.Count;
+            var charCount = reverseChars.Count;
 
-            return new ValueTuple<List<char>, int>(reverseChars, symbolCount);
+            return new ValueTuple<List<char>, int>(reverseChars, charCount);
         }
     }
 }
