@@ -12,9 +12,8 @@ namespace TSMDotNetApi.Extensions
 
         internal static int StringToInt(this string source)
         {
-            int output;
             if (source == null) return 0;
-            return int.TryParse(source.Replace(",", string.Empty).Trim(), out output) ? output : 0;
+            return int.TryParse(source.Replace(",", string.Empty).Trim(), out int output) ? output : 0;
         }
 
         public static string InsertSymbolAfterNsymbols(this string source, int position, string text)
