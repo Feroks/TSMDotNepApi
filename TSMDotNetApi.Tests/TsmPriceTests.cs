@@ -52,5 +52,18 @@ namespace TSMDotNetApi.Tests
         {
             Assert.AreEqual(TsmPrice.FromGold(12).StirngifiedValueGoldOnly, "12g");
         }
+
+        [TestMethod]
+        public void TsmPriceTest8()
+        {
+            var price = new TsmPrice(1000);
+
+            // Set new value
+            price.Total = 1234;
+
+            Assert.AreEqual(price.Gold.Value, 0);
+            Assert.AreEqual(price.Silver.Value, 12);
+            Assert.AreEqual(price.Copper.Value, 34);
+        }
     }
 }

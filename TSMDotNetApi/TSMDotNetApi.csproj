@@ -12,13 +12,13 @@
     <PackageProjectUrl>https://github.com/Feroks/TSMDotNepApi</PackageProjectUrl>
     <RepositoryType>GIT</RepositoryType>
     <PackageTags>TSM TradeSkillMaster</PackageTags>
-    <Version>1.0.3</Version>
-    <FileVersion>1.0.3.0</FileVersion>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <Version>1.0.4</Version>
+    <FileVersion>1.0.4.0</FileVersion>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <LangVersion>6</LangVersion>
+    <LangVersion>7</LangVersion>
     <DocumentationFile>bin\Debug\netstandard1.4\TSMDotNetApi.xml</DocumentationFile>
   </PropertyGroup>
 
