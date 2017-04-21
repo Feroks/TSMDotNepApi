@@ -23,13 +23,20 @@ namespace TSMDotNetApi.Models
 
         public float RegionSaleRate { get; set; }
 
+        private TsmPrice _regionMarketAvg;
         [JsonIgnore]
-        public TsmPrice RegionMarketAvg => new TsmPrice(RegionMarketAvgValue);
+        public TsmPrice RegionMarketAvg => _regionMarketAvg ?? (_regionMarketAvg = new TsmPrice(RegionMarketAvgValue));
+
+        private TsmPrice _regionMinBuyoutAvg;
         [JsonIgnore]
-        public TsmPrice RegionMinBuyoutAvg => new TsmPrice(RegionMinBuyoutAvgValue);
+        public TsmPrice RegionMinBuyoutAvg => _regionMinBuyoutAvg ?? (_regionMinBuyoutAvg = new TsmPrice(RegionMinBuyoutAvgValue));
+
+        private TsmPrice _regionHistoricalPrice;
         [JsonIgnore]
-        public TsmPrice RegionHistoricalPrice => new TsmPrice(RegionHistoricalPriceValue);
+        public TsmPrice RegionHistoricalPrice => _regionHistoricalPrice ?? (_regionHistoricalPrice = new TsmPrice(RegionHistoricalPriceValue));
+
+        private TsmPrice _regionSaleAvg;
         [JsonIgnore]
-        public TsmPrice RegionSaleAvg => new TsmPrice(RegionSaleAvgValue);
+        public TsmPrice RegionSaleAvg => _regionSaleAvg ?? (_regionSaleAvg = new TsmPrice(RegionSaleAvgValue));
     }
 }

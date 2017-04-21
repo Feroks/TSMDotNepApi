@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TSMDotNetApi.Enums;
 using TSMDotNetApi.Exceptions;
+using TSMDotNetApi.Models;
 using TSMDotNetApi.Tests.Properties;
 
 namespace TSMDotNetApi.Tests
@@ -61,6 +62,18 @@ namespace TSMDotNetApi.Tests
                 cs.Cancel();
                 return task;
             });
+        }
+
+        [TestMethod]
+        public void ChangePrice_Of_Item()
+        {
+            var data = new TsmItemRealmData();
+            data.VendorBuy.Total = 12345;
+
+            Assert.AreEqual(data.VendorBuy.Total, 12345);
+            Assert.AreEqual(data.VendorBuy.Gold.Value, 1);
+            Assert.AreEqual(data.VendorBuy.Silver.Value, 23);
+            Assert.AreEqual(data.VendorBuy.Copper.Value, 45);
         }
     }
 }

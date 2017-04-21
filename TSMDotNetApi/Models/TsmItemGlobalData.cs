@@ -44,22 +44,36 @@ namespace TSMDotNetApi.Models
 
         public float UsSaleRate { get; set; }
 
+        private TsmPrice _euMarketAvg;
         [JsonIgnore]
-        public TsmPrice EuMarketAvg => new TsmPrice(EuMarketAvgValue);
-        [JsonIgnore]
-        public TsmPrice EuMinBuyout => new TsmPrice(EuMinBuyoutAvgValue);
-        [JsonIgnore]
-        public TsmPrice EuHistoricalPrice => new TsmPrice(EuHistoricalPriceValue);
-        [JsonIgnore]
-        public TsmPrice EuSaleAvg => new TsmPrice(EuSaleAvgValue);
+        public TsmPrice EuMarketAvg => _euMarketAvg ?? (_euMarketAvg = new TsmPrice(EuMarketAvgValue));
 
+        private TsmPrice _euMinBuyout;
         [JsonIgnore]
-        public TsmPrice UsMarketAvg => new TsmPrice(UsMarketAvgValue);
+        public TsmPrice EuMinBuyout => _euMinBuyout ?? (_euMinBuyout = new TsmPrice(EuMinBuyoutAvgValue));
+
+        private TsmPrice _euHistoricalPrice;
         [JsonIgnore]
-        public TsmPrice UsMinBuyoutAvg => new TsmPrice(UsMinBuyoutAvgValue);
+        public TsmPrice EuHistoricalPrice => _euHistoricalPrice ?? (_euHistoricalPrice = new TsmPrice(EuHistoricalPriceValue));
+
+        private TsmPrice _euSaleAvg;
         [JsonIgnore]
-        public TsmPrice UsHistoricalPrice => new TsmPrice(UsHistoricalPriceValue);
+        public TsmPrice EuSaleAvg => _euSaleAvg ?? (_euSaleAvg = new TsmPrice(EuSaleAvgValue));
+
+        private TsmPrice _usMarketAvg;
         [JsonIgnore]
-        public TsmPrice UsSaleAvg => new TsmPrice(UsSaleAvgValue);
+        public TsmPrice UsMarketAvg => _usMarketAvg ?? (_usMarketAvg = new TsmPrice(UsMarketAvgValue));
+
+        private TsmPrice _usMinBuyoutAvg;
+        [JsonIgnore]
+        public TsmPrice UsMinBuyoutAvg => _usMinBuyoutAvg ?? (_usMinBuyoutAvg = new TsmPrice(UsMinBuyoutAvgValue));
+
+        private TsmPrice _usHistoricalPrice;
+        [JsonIgnore]
+        public TsmPrice UsHistoricalPrice => _usHistoricalPrice ?? (_usHistoricalPrice = new TsmPrice(UsHistoricalPriceValue));
+
+        private TsmPrice _usSaleAvg;
+        [JsonIgnore]
+        public TsmPrice UsSaleAvg => _usSaleAvg ?? (_usSaleAvg = new TsmPrice(UsSaleAvgValue));
     }
 }

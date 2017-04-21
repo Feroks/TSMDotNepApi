@@ -16,10 +16,12 @@ namespace TSMDotNetApi.Models
         [JsonProperty("VendorSell")]
         internal long VendorSellValue { get; set; }
 
+        private TsmPrice _vendorBuy;
         [JsonIgnore]
-        public TsmPrice VendorBuy => new TsmPrice(VendorBuyValue);
+        public TsmPrice VendorBuy => _vendorBuy ?? (_vendorBuy = new TsmPrice(VendorBuyValue));
 
+        private TsmPrice _vendorSell;
         [JsonIgnore]
-        public TsmPrice VendorSell => new TsmPrice(VendorSellValue);
+        public TsmPrice VendorSell => _vendorSell ?? (_vendorSell = new TsmPrice(VendorSellValue));
     }
 }
