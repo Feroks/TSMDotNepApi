@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TSMDotNetApi.Extensions;
 
@@ -23,15 +22,15 @@ namespace TSMDotNetApi.Models.Price
         {
             get
             {
-                (List<char> reverseChars, int charCount) = PrepareData(Total);
+                var data = PrepareData(Total).ToList();
 
-                if (charCount < 5)
+                if (data.Count < 5)
                     return new TsmPriceComponentGold(0);
 
-                reverseChars.RemoveRange(0, 4);
-                reverseChars.Reverse();
+                data.RemoveRange(0, 4);
+                data.Reverse();
 
-                return new TsmPriceComponentGold(string.Join(string.Empty, reverseChars).StringToInt());
+                return new TsmPriceComponentGold(string.Join(string.Empty, data).StringToInt());
             }
         }
 
@@ -39,10 +38,10 @@ namespace TSMDotNetApi.Models.Price
         {
             get
             {
-                (List<char> reverseChars, int charCount) = PrepareData(Total);
+                var data = PrepareData(Total).ToList();
 
-                var silverCharCount = charCount < 4 ? 4 - charCount : 2;
-                return new TsmPriceComponentSilver(string.Join(string.Empty, reverseChars.Skip(2).Take(silverCharCount).Reverse()).StringToInt());
+                var silverCharCount = data.Count < 4 ? 4 - data.Count : 2;
+                return new TsmPriceComponentSilver(string.Join(string.Empty, data.Skip(2).Take(silverCharCount).Reverse()).StringToInt());
             }
         }
 
@@ -50,10 +49,10 @@ namespace TSMDotNetApi.Models.Price
         {
             get
             {
-                (List<char> reverseChars, int charCount) = PrepareData(Total);
+                var data = PrepareData(Total).ToList();
 
-                var copperCharCount = charCount < 2 ? charCount : 2;
-                return new TsmPriceComponentCopper(string.Join(string.Empty, reverseChars.Take(copperCharCount).Reverse()).StringToInt());
+                var copperCharCount = data.Count < 2 ? data.Count : 2;
+                return new TsmPriceComponentCopper(string.Join(string.Empty, data.Take(copperCharCount).Reverse()).StringToInt());
             }
         }
         
@@ -71,12 +70,11 @@ namespace TSMDotNetApi.Models.Price
             return new TsmPrice(copper * 10000);
         }
 
-        private static (List<char> ReverseChars, int CharCount) PrepareData(long value)
+        private static IEnumerable<char> PrepareData(long value)
         {
             var reverseChars = value.ToString().ToCharArray().Reverse().ToArray().ToList();
-            var charCount = reverseChars.Count;
 
-            return new ValueTuple<List<char>, int>(reverseChars, charCount);
+            return reverseChars;
         }
     }
 }
