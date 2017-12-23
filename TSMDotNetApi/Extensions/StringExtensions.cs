@@ -13,10 +13,10 @@ namespace TSMDotNetApi.Extensions
         internal static int StringToInt(this string source)
         {
             if (source == null) return 0;
-            return int.TryParse(source.Replace(",", string.Empty).Trim(), out int output) ? output : 0;
+            return int.TryParse(source.Replace(",", string.Empty).Trim(), out var output) ? output : 0;
         }
 
-        public static string InsertSymbolAfterNsymbols(this string source, int position, string text)
+        internal static string InsertSymbolAfterNsymbols(this string source, int position, string text)
         {
             return string.Join(text, Enumerable.Range(0, (source.Length - 1) / position + 1)
                 .Select(i => source.Substring(i * position, Math.Min(source.Length - i * position, position))));
@@ -24,7 +24,10 @@ namespace TSMDotNetApi.Extensions
 
         internal static string NormalizeServerName(this string source)
         {
-            return source.Replace("'", string.Empty).Replace(" ", "-").ToLower();
+            return source
+                .Replace("'", string.Empty)
+                .Replace(" ", "-")
+                .ToLower();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace TSMDotNetApi.Enums
 {
     /// <summary>
-    /// Enum  used to secify realm region
+    /// Enum  used to specify realm region
     /// </summary>
     public enum TsmRegion
     {

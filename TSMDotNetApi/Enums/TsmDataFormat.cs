@@ -1,7 +1,7 @@
 ﻿namespace TSMDotNetApi.Enums
 {
     /// <summary>
-    /// Formtas in which data is available
+    /// Formats in which data is available
     /// </summary>
     public enum TsmDataFormat
     {
