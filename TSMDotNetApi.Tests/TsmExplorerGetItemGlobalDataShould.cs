@@ -5,19 +5,19 @@ using Xunit;
 
 namespace TSMDotNetApi.Tests
 {
-    public class ItemGlobalDataTests
+    public class TsmExplorerGetItemGlobalDataShould
     {
         private static ITsmExplorer _tsmExplorer;
         private static readonly string ApiKey = Resources.ApiKey;
         public static string RealmName { get; } = "Razuvious";
 
-        public ItemGlobalDataTests()
+        public TsmExplorerGetItemGlobalDataShould()
         {
             _tsmExplorer = new TsmExplorer(ApiKey);
         }
 
         [Fact]
-        public async Task GetItemGlobalData_31336()
+        public async Task GetDataForValidItemId()
         {
             var data = await _tsmExplorer.GetItemGlobalDataAsync(31336);
 
@@ -31,7 +31,7 @@ namespace TSMDotNetApi.Tests
         }
 
         [Fact]
-        public async Task GetItemGlobalData_Exception()
+        public async Task ThrowExceptionIfItemNotFound()
         {
             await Assert.ThrowsAsync<TsmFailedException>(() => _tsmExplorer.GetItemGlobalDataAsync(-1));
         }
